@@ -58,54 +58,5 @@ function finish(){A.innerHTML=`<div class="card"><p class="good">🌱 できた�
 function parent(){A.innerHTML=`<div class="card"><h2>保護者用</h2><input id="pid" class="input" placeholder="PONO001"><button onclick="report(pid.value.trim().toUpperCase(),false)">学習の様子を見る</button><button class="light" onclick="login()">もどる</button></div>`}
 function teacher(){let d=data();A.innerHTML=`<h1>先生ダッシュボード</h1><div class="card"><p>点数だけでなく「説明を見た」「ヒントを使った」「自分でできた」を確認します。</p><table><tr><th>児童</th><th>在籍</th><th></th></tr>${STUDENTS.map(x=>`<tr><td>${x.name}</td><td>小${x.actualGrade}</td><td><button onclick="report('${x.id}',true)">個別</button></td></tr>`).join("")}</table></div><button onclick="login()">もどる</button>`}
 function report(id,t){let st=STUDENTS.find(x=>x.id===id);if(!st)return alert("IDを確認してください");let rows=Object.values(data()[id]||{});A.innerHTML=`<div class="card"><h1>Pono 個別学習報告書</h1><p>児童：${st.name}　　在籍：小学${st.actualGrade}年</p><p>作成日：${new Date().toLocaleDateString("ja-JP")}</p>${rows.length?`<table><tr><th>教材</th><th>教科</th><th>学習</th><th>ヒント</th><th>自分で</th></tr>${rows.map(r=>`<tr><td>${r.g}年 ${r.title}</td><td>${r.s}</td><td>${r.learned}</td><td>${r.hint}</td><td>${r.independent}</td></tr>`).join("")}</table>`:"<p>まだ学習記録はありません。</p>"}<p>「書けない＝理解していない」とはせず、読み・意味・選択・形・計算・概念理解などを分けて確認します。</p>${t?`<button onclick="window.print()">学校提出用に印刷／PDF保存</button>`:""}</div><button onclick="${t?"teacher()":"parent()"}">もどる</button>`}
-// 🔊 読み上げ機能
-function speak(text){
-  if(!("speechSynthesis" in window)){
-    alert("この端末では読み上げ機能を利用できません。");
-    return;
-  }
-  window.speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang="ja-JP";
-  u.rate=0.85;
-  window.speechSynthesis.speak(u);
-}
 
-function speakQuestion(){
-  if(!unit || !unit.qs || !unit.qs[qi]) return;
-  const q=unit.qs[qi];
-
-  // 「読み」の問題は漢字を読んで答えを教えない
-  if(q.skill==="読み"){
-    speak("画面にある漢字の読み方を選んでください。");
-  }else{
-    speak(q.q);
-  }
-}
-
-function speakChoices(){
-  if(!unit || !unit.qs || !unit.qs[qi]) return;
-  const q=unit.qs[qi];
-  const text=q.c.map((x,i)=>(i+1)+"、"+x).join("。");
-  speak("選択肢です。"+text);
-}
-// 🔊 問題画面に読み上げボタンを自動追加
-const originalShowQ = showQ;
-
-showQ = function(){
-  originalShowQ();
-
-  const card = A.querySelector(".card");
-  if(!card) return;
-
-  const title = card.querySelector("h1");
-  if(!title) return;
-
-  const audioBox = document.createElement("div");
-  audioBox.innerHTML =
-    '<button class="light" onclick="speakQuestion()">🔊 問題をきく</button>' +
-    '<button class="light" onclick="speakChoices()">🔊 選択肢をきく</button>';
-
-  title.insertAdjacentElement("afterend", audioBox);
-};
 login();
