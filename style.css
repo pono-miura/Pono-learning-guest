@@ -1,1 +1,10 @@
-*{box-sizing:border-box}body{margin:0;font-family:sans-serif;background:#f5faf6;color:#26352d}header{padding:20px;background:white;font-size:22px}main{max-width:850px;margin:auto;padding:22px}.card{background:white;padding:22px;border-radius:20px;margin:15px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}button{width:100%;padding:17px;margin:6px 0;border:0;border-radius:15px;background:#315f45;color:white;font-size:17px}.light{background:#edf5ef;color:#26352d}.big{font-size:30px}.input{width:100%;padding:15px;font-size:17px;border:1px solid #ccc;border-radius:12px}table{width:100%;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}@media print{button,header{display:none}.card{border:0}}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;background:#f4faf6;color:#24372d}
+header{background:white;padding:26px max(24px,calc((100% - 760px)/2));font-size:30px;font-weight:800;border-bottom:1px solid #e6eee8}
+main{max-width:680px;margin:0 auto;padding:36px 20px 70px}.card{background:#fff;border-radius:28px;padding:34px 28px;margin-bottom:22px}
+h1{font-size:34px;margin:0 0 24px} h2{font-size:27px}.lead{font-size:21px;line-height:1.7}.small{font-size:16px;line-height:1.7}
+button{width:100%;border:0;border-radius:20px;padding:22px 18px;margin:8px 0;font-size:23px;background:#2f6849;color:white}
+button.light{background:#edf6f0;color:#234b35;border:2px solid #d7e8dc} button.audio{background:#e8f2ff;color:#23425f}
+button.hint{background:#fff6d9;color:#5c4b17} button.back{background:#f0f0f0;color:#333}
+.grid{display:grid;gap:12px}.choice{min-height:78px}.notice{background:#edf6f0;border-radius:18px;padding:18px;margin:16px 0;font-size:19px;line-height:1.6}
+.progress{font-size:16px;margin-bottom:12px}.big{font-size:38px;font-weight:800;line-height:1.45}.center{text-align:center}
+@media(max-width:480px){header{font-size:26px;padding:22px 20px}main{padding:28px 16px}.card{padding:28px 22px}h1{font-size:31px}.big{font-size:34px}}
