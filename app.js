@@ -53,7 +53,7 @@ function learn(){
  state.learned=true; state.qi=0; state.hints=0; state.independent=0;
  A.innerHTML=`<div class="card"><div class="progress">① まなぶ → ② 一緒にやってみる → ③ 自分でやる</div>
  <h1>${state.subject}・${state.unit.title}</h1><h2>① まず、まなぼう</h2><div class="notice">${esc(state.unit.learn)}</div>
- <button class="audio" onclick="speak(${JSON.stringify(state.unit.learn)})">🔊 説明をきく</button>
+ <button class="audio" onclick="speak(state.unit.learn)">🔊 説明をきく</button>
  <button onclick="practice()">一緒にやってみる</button></div>`;
 }
 function practice(){
